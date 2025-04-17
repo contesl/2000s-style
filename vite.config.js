@@ -7,5 +7,5 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [react()],
-  base: "/2000s-style",
+  base: "/2000s-style/",
 })
