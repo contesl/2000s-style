@@ -1,10 +1,10 @@
 import React from 'react';
-//cambio imagen
+import personalstyle from "/src/img/PersonalStyle.jpg";
 const Inicio = () => {
   return (
     <main>
       <figure className="contenedorImagen centered">
-        <img id="imagen-index" src="/src/img/PersonalStyle.jpg" alt="Personal Style" />
+        <img id="imagen-index" src={personalstyle} alt="Personal Style" />
       </figure>
     </main>
   );
