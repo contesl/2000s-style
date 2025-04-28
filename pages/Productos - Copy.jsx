@@ -14,27 +14,15 @@ const Productos = () => {
   });
   const [modalDescripcion, setModalDescripcion] = useState("");
   const [productoAgregado, setProductoAgregado] = useState(null); // nuevo estado
-  const [error, setError] = useState(null); // estado para errores
 
   useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        const res = await fetch("https://dummyjson.com/products");
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => {
         const filtrados = data.products.filter(p => p.category !== "groceries");
         setProductos(filtrados);
         setCategorias([...new Set(filtrados.map(p => p.category))]);
-        setError(null); // limpiar errores previos
-      } catch (err) {
-        console.error("Error al obtener productos:", err);
-        setError("Hubo un problema al cargar los productos. Intenta nuevamente más tarde.");
-      }
-    };
-
-    fetchProductos();
+      });
   }, []);
 
   useEffect(() => {
@@ -74,11 +62,6 @@ const Productos = () => {
 
   return (
     <div className="container mt-4">
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
-      )}
       <FiltroCategorias
         categorias={categorias}
         filtro={filtroCategoria}
